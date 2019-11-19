@@ -1,28 +1,31 @@
-import React from 'react'
-import cards from './cards.json'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
+import Button from './Button'
 
-export default function Card({ title, question, answer, tags, isBookmarked }) {
+export default function Card({ card }) {
+  const Card = styled.section`
+    padding: 20px;
+    margin: 20px;
+    background: lightgrey;
+    color: white;
+    border-radius: 6px;
+    box-shadow: 0 10px 10px #0002;
+    position: relative;
+  `
+  const [showCard, setShowCard] = useState(false)
   return (
     <div>
-      {cards.map((card, index) => (
-        <CardStyled>
-          <h2>{card.title}</h2>
-          <p>{card.question}</p>
-          <p>{card.answer}</p>
-          <button>Show answer</button>
-        </CardStyled>
-      ))}
+      <Card>
+        <CardQuestion>{card.question}</CardQuestion>
+        <p>{showCard ? card.answer : ''}</p>
+        <Button onClick={() => setShowCard(!showCard)}>
+          {showCard ? 'Hide answer' : 'Show answer'}
+        </Button>
+      </Card>
     </div>
   )
 }
 
-const CardStyled = styled.section`
-  padding: 20px;
-  margin: 20px;
-  background: lightgrey;
-  color: white;
-  border-radius: 6px;
-  box-shadow: 0 10px 10px #0002;
-  position: relative;
+const CardQuestion = styled.p`
+  font-size: 1.5em;
 `
