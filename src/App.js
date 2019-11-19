@@ -1,7 +1,7 @@
 import React from 'react'
+import styled from 'styled-components/macro'
+import Card from './Card'
 
-function App() {
-  return <div>Hello World</div>
+export default function App() {
+  return <Card></Card>
 }
-
-export default App

@@ -1,0 +1,51 @@
+[
+  {
+    "title": "HTML-Element erzeugen",
+    "question": "Wie erzeuge ich ein neues HTML-Element in JavaScript?",
+    "answer": "document.createElement('div')",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "HTML-Element einfügen 1",
+    "question": "Wie füge ich ein Element über einem anderen Element ein?",
+    "answer": ".insertAdjacentElement(position, element)",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "HTML-Element einfügen 2",
+    "question": "Wie füge ich HTML in ein vorhandenes HTML-Element ein?",
+    "answer": ".innerHTML",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "Array: Elemente ausloggen",
+    "question": "Wie logge ich alle Strings aus einem Array mit mehreren Strings aus?",
+    "answer": "list.forEach(element => console.log(element))",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "CSS - Style 1",
+    "question": "Wenn der User runterscrollt, soll die Schriftgröße der Überschrift größer werden!",
+    "answer": "const el = document.querySelector(h1) -> window.addEventListener(\"scroll\", function) -> el.style.fontSize = \"irgendwas Größeres\"",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "querySelector 1",
+    "question": "Wie schnappe ich mir ein Element mit document.querySelector, das vom Typ range sein soll?",
+    "answer": "document.querySelector('input[type=range]'",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  },
+  {
+    "title": "querySelector 2",
+    "question": "Was macht das 'target = document' in der Funktion: \n\nfunction get (sel, target = document) {\nreturn target.querySelector(sel) \n}",
+    "answer": "default-Parameter wird festgelegt, nämlich document als target. Dieser wird automatisch gewählt, wenn wir kein Argument für target eingeben beim Aufrufen der Funktion",
+    "tags": ["javascript", "basics"],
+    "isBookmarked": true
+  }
+]
