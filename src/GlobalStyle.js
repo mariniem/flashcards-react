@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   margin: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 `
 

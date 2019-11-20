@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from './Button'
+import Bookmark from './Bookmark'
 
-export default function Card({ card }) {
+export default function Card({ card, toggleBookmarked }) {
   const Card = styled.section`
     padding: 20px;
     margin: 20px;
@@ -16,6 +17,7 @@ export default function Card({ card }) {
   return (
     <div>
       <Card>
+        <Bookmark active={card.isBookmarked} onClick={toggleBookmarked} />
         <CardQuestion>{card.question}</CardQuestion>
         <p>{showCard ? card.answer : ''}</p>
         <Button onClick={() => setShowCard(!showCard)}>

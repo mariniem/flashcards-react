@@ -1,19 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Card from './Card'
-import Button from './Button'
-import cards from './cards.json'
+import CardsData from './cards.json'
 import GlobalStyle from './GlobalStyle'
+import ButtonFilter from './ButtonFilter'
 
 function App() {
+  const [cards, setCards] = useState(CardsData)
+  const [isOnlyBookmarksShown, setIsOnlyBookmarkShown] = useState(false)
   return (
     <Grid>
       <GlobalStyle />
-      {cards.map(card => (
-        <Card card={card}></Card>
-      ))}
+      <ButtonFilter
+        onClick={() => setIsOnlyBookmarkShown(!isOnlyBookmarksShown)}
+      >
+        {isOnlyBookmarksShown === false ? 'Bookmarked cards' : 'All cards'}
+      </ButtonFilter>
+      {isOnlyBookmarksShown
+        ? cards
+            .filter(card => card.isBookmarked === true)
+            .map((card, index) => (
+              <Card
+                card={card}
+                key={index}
+                toggleBookmarked={() => toggleBookmarked(index)}
+              ></Card>
+            ))
+        : cards.map((card, index) => (
+            <Card
+              card={card}
+              key={index}
+              toggleBookmarked={() => toggleBookmarked(index)}
+            ></Card>
+          ))}
     </Grid>
   )
+
+  function toggleBookmarked(index) {
+    const card = cards[index]
+    setCards([
+      ...cards.slice(0, index),
+      { ...card, isBookmarked: !card.isBookmarked },
+      ...cards.slice(index + 1),
+    ])
+  }
 }
 
 export default App
