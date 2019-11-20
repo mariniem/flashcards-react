@@ -1,55 +1,47 @@
-import React, { useState } from 'react'
-import styled from 'styled-components/macro'
-import Card from './Card'
-import CardsData from './cards.json'
-import GlobalStyle from './GlobalStyle'
-import ButtonFilter from './ButtonFilter'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Home from './Home'
 
-function App() {
-  const [cards, setCards] = useState(CardsData)
-  const [isOnlyBookmarksShown, setIsOnlyBookmarkShown] = useState(false)
+export default function App() {
   return (
-    <Grid>
-      <GlobalStyle />
-      <ButtonFilter
-        onClick={() => setIsOnlyBookmarkShown(!isOnlyBookmarksShown)}
-      >
-        {isOnlyBookmarksShown === false ? 'Bookmarked cards' : 'All cards'}
-      </ButtonFilter>
-      {isOnlyBookmarksShown
-        ? cards
-            .filter(card => card.isBookmarked === true)
-            .map((card, index) => (
-              <Card
-                card={card}
-                key={index}
-                toggleBookmarked={() => toggleBookmarked(index)}
-              ></Card>
-            ))
-        : cards.map((card, index) => (
-            <Card
-              card={card}
-              key={index}
-              toggleBookmarked={() => toggleBookmarked(index)}
-            ></Card>
-          ))}
-    </Grid>
-  )
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
 
-  function toggleBookmarked(index) {
-    const card = cards[index]
-    setCards([
-      ...cards.slice(0, index),
-      { ...card, isBookmarked: !card.isBookmarked },
-      ...cards.slice(index + 1),
-    ])
-  }
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-export default App
+function About() {
+  return <h2>Hallo ich bins.</h2>
+}
 
-const Grid = styled.div`
-  display: grid;
-  gap: 20px;
-  margin: 20px 50px;
-`
+function Users() {
+  return <h2>Flippo Flipps</h2>
+}
