@@ -1,47 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Home from './Home'
+import CardsData from './cards.json'
+import Create from './Create'
+import Nav from './Nav.js'
 
-export default function App() {
+function App() {
+  const [cards, setCards] = useState(CardsData)
+
+  function toggleBookmarked(index) {
+    const card = cards[index]
+    setCards([
+      ...cards.slice(0, index),
+      { ...card, isBookmarked: !card.isBookmarked },
+      ...cards.slice(index + 1),
+    ])
+  }
+
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+      <Nav
+        items={[
+          { path: '/', text: 'Hello' },
+          { path: '/create', text: 'Create' },
+        ]}
+      />
+      <Switch>
+        <Route exact path="/">
+          <Home cards={cards} toggleBookmarked={toggleBookmarked} />
+        </Route>
+        <Route path="/create">
+          <Create />
+        </Route>
+      </Switch>
     </Router>
   )
 }
 
-function About() {
-  return <h2>Hallo ich bins.</h2>
-}
-
-function Users() {
-  return <h2>Flippo Flipps</h2>
-}
+export default App
