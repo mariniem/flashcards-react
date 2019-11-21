@@ -8,7 +8,8 @@ mongoose.connect('mongodb://localhost:27017/flashcards', {
 
 const app = express()
 app.use(express.json())
-app.listen(3334, () => console.log('Express ready on port 3334'))
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log(`${PORT}`))
 
 app.get('/cards', (req, res) => {
   Card.find()
