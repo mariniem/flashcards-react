@@ -17,18 +17,18 @@ export default function Home({ cards, toggleBookmarked }) {
       {isOnlyBookmarkShown
         ? cards
             .filter(card => card.isBookmarked === true)
-            .map((card, index) => (
+            .map(card => (
               <Card
-                toggleBookmarked={() => toggleBookmarked(index)}
-                key={index}
+                toggleBookmarked={() => toggleBookmarked(card._id)}
+                key={card._id}
                 {...card}
               ></Card>
             ))
-        : cards.map((card, index) => (
+        : cards.map(card => (
             <Card
               card={card}
-              key={index}
-              toggleBookmarked={() => toggleBookmarked(index)}
+              key={card._id}
+              toggleBookmarked={() => toggleBookmarked(card._id)}
               {...card}
             ></Card>
           ))}

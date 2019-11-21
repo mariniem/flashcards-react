@@ -1,20 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Home from './Home'
-import CardsData from './cards.json'
 import Create from './Create'
 import Nav from './Nav.js'
+import { getCards, patchCard } from './services'
 
 function App() {
-  const [cards, setCards] = useState(CardsData)
+  const [cards, setCards] = useState([])
 
-  function toggleBookmarked(index) {
+  useEffect(() => {
+    getCards().then(setCards)
+  }, [])
+
+  function toggleBookmarked(id) {
+    const index = cards.findIndex(card => card._id === id)
     const card = cards[index]
-    setCards([
-      ...cards.slice(0, index),
-      { ...card, isBookmarked: !card.isBookmarked },
-      ...cards.slice(index + 1),
-    ])
+    patchCard({ isBookmarked: !card.isBookmarked, _id: card._id }).then(
+      changedCard => {
+        setCards([
+          ...cards.slice(0, index),
+          changedCard,
+          ...cards.slice(index + 1),
+        ])
+      }
+    )
   }
 
   return (
