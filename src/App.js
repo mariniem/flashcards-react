@@ -13,6 +13,7 @@ function App() {
   }, [])
 
   function toggleBookmarked(id) {
+    console.log(id)
     const index = cards.findIndex(card => card._id === id)
     const card = cards[index]
     patchCard({ isBookmarked: !card.isBookmarked, _id: card._id }).then(

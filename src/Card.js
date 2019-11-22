@@ -41,4 +41,6 @@ const CardWrapper = styled.section`
 Card.propTypes = {
   question: PropTypes.string.isRequired,
   answer: PropTypes.string.isRequired,
+  toggleBookmarked: PropTypes.func.isRequired,
+  isBookmarked: PropTypes.bool.isRequired,
 }
